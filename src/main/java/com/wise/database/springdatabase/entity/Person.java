@@ -41,10 +41,10 @@ public class Person {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Date getBirth_date() {
+	public Date getBirthDate() {
 		return birth_date;
 	}
-	public void setBirth_date(Date birth_date) {
+	public void setBirthDate(Date birth_date) {
 		this.birth_date = birth_date;
 	}
 	
