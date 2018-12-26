@@ -11,34 +11,33 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.wise.database.springdatabase.entity.Person;
 import com.wise.database.springdatabase.jdbc.PersonJdbcDao;
+import com.wise.database.springdatabase.jpa.PersonJpaRepository;
 
-//@SpringBootApplication
-public class SpringDatabaseApplication implements CommandLineRunner{
+@SpringBootApplication
+public class JpaApplication implements CommandLineRunner{
 	
 	@Autowired
-	PersonJdbcDao dao;
+	PersonJpaRepository repository;
 	
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public static void main(String[] args){
-		SpringApplication.run(SpringDatabaseApplication.class, args);
+		SpringApplication.run(JpaApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		dao.findAll();
-		logger.info("All users -> {}",dao.findAll());
-		logger.info("User id 10001 -> {}",dao.findById(10002));
-		logger.info("User location ajax -> {}",dao.findByLocation("Ajax"));
-		
-		logger.info("Deleting id 10002 -> {}",dao.deleteById(10002));
-		logger.info("Inserting 10004 -> {}", 
-				dao.insert(new Person(10004, "Tara", "Berlin", new Date())));
+		logger.info("User id 10001 -> {}",repository.findById(10002));
+		logger.info("Inserting -> {}", 
+				repository.insert(new Person("Tara", "Berlin", new Date())));
 		
 		logger.info("Update 10003 -> {}", 
-				dao.update(new Person(10003, "Pieter", "Utrecht", new Date())));
+				repository.update(new Person(10003, "Pieter", "Utrecht", new Date())));
+		repository.deleteById(10002);
+
+		logger.info("All users -> {}", repository.findAll());
 
 	}
 
